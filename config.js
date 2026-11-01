@@ -1,44 +1,52 @@
 // Configuração da página que revela a oferta da Super Black Friday. É o arquivo que se edita à mão antes de publicar.
 window.CONFIG = {
-  // Checkout da Hub.la com a oferta da Black (2 anos por R$ 397). Enquanto estiver "[LINK]",
-  // os botões levam até a caixa de preço. Cole o link só na cópia que vai ao ar.
-  CHECKOUT: "[LINK]",
-
   // Preço da Super Black Friday.
   PRECO: 397,
   // Parcela no cartão. PROPOSTA: calculada com a mesma taxa do Hub.la do VIP (R$ 297 → 12x R$ 30,18).
   // Confirmar no checkout. Se ficar null, a página mostra só "ou em até 12x no cartão".
   PARCELA: "12x de R$ 40,34",
-  // Preço normal de 1 ano de Comunidade VIP (base/central-de-voos/negocio.md, L2 e L3).
+  // Preço normal de 1 ano de Comunidade VIP nesta versão (oferta-black: R$ 397; oferta-black2: R$ 297).
   PRECO_VIP_ANO: 297,
 
-  // Prazo final da oferta, no formato "2026-11-04T23:59:00-03:00". Com prazo, aparece a contagem regressiva.
-  // null = sem contagem. Escassez só se for verdadeira: só preencher com a data em que o carrinho fecha de verdade.
-  PRAZO: null,
+  // Horário das vagas, todo dia, no horário de Brasília.
+  // Antes de ABRE: contagem "as vagas abrem às 19h". Entre ABRE e FECHA: "vagas abertas, fecham em".
+  // De FECHA até ENCERRADO_ATE: "as vagas de hoje foram encerradas" (com a contagem para as 19h). Depois, volta a contagem.
+  VAGAS: { ABRE: "19:00", FECHA: "00:10", ENCERRADO_ATE: "12:00" },
+  TEXTOS: {
+    antes: "Às 19h o link para garantir a sua vaga chega no seu grupo do WhatsApp.",
+    aberto: "Garanta a sua pelo link que chegou no seu grupo do WhatsApp.",
+    encerrado: "Novas vagas abrem hoje às 19h, pelo link no seu grupo do WhatsApp.",
+  },
+  // A página não tem botão (pedido do Pedro, 31/10/2026). Se um dia precisar, true + CHECKOUT mostra o botão só com as vagas abertas.
+  MOSTRAR_BOTAO_NO_ABERTO: false,
+  CHECKOUT: "",
 
-  // Pilha de valor. "valor" = preço normal de cada entrega.
-  // oficial: true = valor que está na base. oficial: false = PROPOSTA, a validar com o Pedro antes de publicar.
+  // Pilha de valor: "valor" é o preço de 1 ano de cada entrega, para UM acesso.
+  // A âncora da página é a soma × 2 anos × 2 acessos (pedido do Pedro, 31/10/2026).
+  // oficial: true = valor que está na base. oficial: false = PROPOSTA, a validar com o Pedro.
   PRINCIPAIS: [
-    { nome: "Comunidade VIP no WhatsApp", detalhe: "2 anos de acesso", desc: "Mais de 150 promoções de passagens por dia, saindo de todos os aeroportos do Brasil e separadas por região.", valor: 594, oficial: true },
-    { tag: "Novidade", nome: "APP Central de Voos", detalhe: "2 anos de acesso", desc: "Tudo da Central reunido no seu celular, com praticidade no dia a dia: você diz pra onde quer ir e o app busca as promoções pra você.", valor: 497, oficial: false },
-    { nome: "Workshop Desvendando as Milhas", detalhe: "ao vivo", desc: "Um encontro ao vivo pra entender de vez como as milhas funcionam e começar a usar do jeito certo.", valor: 397, oficial: false },
+    { nome: "Comunidade VIP no WhatsApp", desc: "Grupos separados por região, com mais de 1.000 promoções por semana e todas as datas disponíveis, saindo de todo o Brasil para o Brasil e o mundo.", valor: 297, oficial: true },
+    { tag: "Novidade", nome: "APP Central de Voos", desc: "Tudo da Central no seu celular: busca personalizada entre todas as promoções ativas e monitoramento das suas passagens com IA.", valor: 497, oficial: false },
+    { nome: "Workshop: O Segredo das Passagens Baratas", desc: "Um encontro ao vivo pra entender de vez como chegar nas passagens mais baratas que existem.", valor: 397, oficial: false },
   ],
   BONUS: [
-    { tag: "Só na Black", nome: "Mais um acesso VIP pra quem você quiser", detalhe: "2 anos", desc: "Leve o seu marido, a sua esposa, a sua mãe ou um amigo. A pessoa também entra na Comunidade VIP, pelos mesmos 2 anos.", valor: 594, oficial: false },
-    { nome: "Monitoramento Personalizado com IA", desc: "O nosso sistema junta inteligência artificial e uma equipe especializada pra vigiar o preço das suas viagens e avisar quando baixa.", valor: 297, oficial: false },
-    { nome: "Curso de Milhas", desc: "Aulas em vídeo pra juntar e usar pontos e milhas do jeito certo.", valor: 397, oficial: false },
-    { nome: "Grupo de Estratégias", desc: "Transferências bonificadas, promoções de compra de milhas e as melhores oportunidades dos programas de pontos, em primeira mão.", valor: 197, oficial: false },
-    { nome: "Suporte Jurídico", desc: "Advogada especialista em direito do passageiro pra quando o voo der problema.", valor: 197, oficial: false },
+    { nome: "Curso Completo de Milhas", desc: "Pra quem quiser aprender a viajar pagando só a taxa de embarque. Você não precisa saber nada disso pra aproveitar o VIP.", valor: 397, oficial: false },
+    { nome: "Grupo de Estratégias", desc: "Transferências bonificadas, promoções de compra de milhas e as melhores oportunidades, em primeira mão.", valor: 197, oficial: false },
+    { nome: "Suporte Jurídico Gratuito", desc: "Advogada especialista no direito do passageiro aéreo pra qualquer problema nas suas viagens.", valor: 197, oficial: false },
+    { nome: "Guia dos Melhores Cartões de Crédito", desc: "Pra transformar cada gasto do seu dia a dia em viagens inesquecíveis.", valor: 97, oficial: false },
   ],
 
-  // Depoimentos em vídeo do vturb (os mesmos de centraldevoos.com/depoimentos). capa = arquivo em midia/depoimentos/.
+  // Depoimentos em vídeo do vturb, escolhidos entre os de depoimentos.centraldevoos.com. capa = arquivo em midia/depoimentos/.
+  // proporcao = a do vídeo (o player ocupa esse espaço quando a pessoa toca).
   VTURB_CONTA: "00c8b9a1-000b-422f-abff-cb49b5ef54fa",
   VIDEOS: [
-    { player: "6a1f763a0f11a909a69519f6", capa: "video1.jpg" },
-    { player: "6a1f764a0b98d8bade87d2dc", capa: "video2.jpg" },
-    { player: "6a1f76bc544d592ebd793c38", capa: "video3.jpg" },
-    { player: "6a1f76450b98d8bade87d2ca", capa: "video6.jpg" },
-    { player: "6a1f763f504b54b9bc1b4bec", capa: "video7.jpg" },
-    { player: "6a1f766e35493f0821a09014", capa: "video10.jpg" },
+    { player: "6ae4e1b0d653f6988a0ff277", capa: "v1.jpg", proporcao: "9 / 16", marca: "Austrália", titulo: "Quatro passagens para um reencontro" },
+    { player: "6ae4e1db183f0675fc8d469c", capa: "v2.jpg", proporcao: "3 / 4", marca: "Executiva", titulo: "Rio–Madri, sem conexão e de executiva" },
+    { player: "6ae4e1b5217265d6b619517a", capa: "v3.jpg", proporcao: "3 / 4", marca: "Novos destinos", titulo: "De Cancún aos próximos destinos" },
+    { player: "6a1f764a0b98d8bade87d2dc", capa: "v4.jpg", proporcao: "9 / 16", marca: "Roma", titulo: "Ida e volta de executiva para o casal" },
+    { player: "6ae4e1c73ce680b34e9eec8e", capa: "v5.jpg", proporcao: "9 / 16", marca: "Noronha", titulo: "O sonho de Noronha virou passagem emitida" },
+    { player: "6a1f7665c2771546fc15f770", capa: "v6.jpg", proporcao: "9 / 16", marca: "Fortaleza", titulo: "Ida e volta por R$ 440" },
+    { player: "6ae4e1fb2c77645459956248", capa: "v7.jpg", proporcao: "9 / 16", marca: "Monitoramento", titulo: "Roma começou com um monitoramento" },
+    { player: "6ae4e19a217265d6b619510f", capa: "v8.jpg", proporcao: "9 / 16", marca: "Milhas", titulo: "Pontos do cartão viraram viagem em família" },
   ],
 };

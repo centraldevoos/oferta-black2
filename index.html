@@ -4,23 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Oferta Super Black Friday | Central de Voos</title>
-<meta name="description" content="A oferta da Super Black Friday da Central de Voos: 2 anos de Comunidade VIP, APP e Workshop por R$ 397, e mais um acesso pra quem você quiser.">
+<meta name="description" content="A oferta da Super Black Friday da Central de Voos: 2 anos de Comunidade VIP, APP e Workshop por R$ 397, e mais um acesso pra quem você quiser. Vagas a partir das 19h.">
 <meta name="robots" content="noindex">
 <meta property="og:type" content="website">
 <meta property="og:title" content="A oferta da Super Black Friday chegou">
-<meta property="og:description" content="2 anos de Comunidade VIP, APP e Workshop por R$ 397. E mais um acesso pra quem você quiser.">
+<meta property="og:description" content="2 anos de Comunidade VIP, APP e Workshop por R$ 397. E mais um acesso pra quem você quiser. Vagas a partir das 19h.">
 <meta property="og:url" content="https://centraldevoos.github.io/oferta-black2/">
 <meta name="theme-color" content="#050506">
 <link rel="icon" href="midia/logo-icone.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="config.js?v=1"></script>
+<script src="config.js?v=3"></script>
 <style>
 :root {
   --bg: #050506;
   --card: #0f0f11;
-  --card-2: #141417;
   --linha: #26262b;
   --ink: #f7f5ef;
   --muted: #a3a1a8;
@@ -29,6 +28,7 @@
   --gold-glow: rgba(255, 196, 46, .55);
   --on-gold: #1a1203;
   --verde: #3ddc84;
+  --verde-glow: rgba(61, 220, 132, .45);
   --mola: cubic-bezier(.22, 1, .36, 1);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -46,22 +46,16 @@ section { position: relative; }
 .titulo { text-align: center; font-size: clamp(28px, 3.4vw, 42px); letter-spacing: -.03em; line-height: 1.12; }
 .lead { text-align: center; color: var(--muted); margin: 14px auto 0; max-width: 34em; }
 .selo-topo { display: table; margin: 0 auto; padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(255, 200, 61, .55); background: rgba(255, 200, 61, .08); color: var(--gold); font-size: 14px; font-weight: 700; }
-
-/* Botão dourado */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 60px; padding: 0 34px; border-radius: 14px;
-  background: linear-gradient(180deg, var(--gold-2), var(--gold) 60%, #f2b01e); color: var(--on-gold);
-  font: 800 17px/1.1 "Plus Jakarta Sans", sans-serif; text-decoration: none; border: 0; cursor: pointer; text-align: center;
-  box-shadow: 0 0 0 1px rgba(255, 226, 138, .5) inset, 0 10px 40px -8px var(--gold-glow);
-  transition: transform .25s var(--mola), box-shadow .25s; }
-.btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(255, 226, 138, .7) inset, 0 16px 50px -6px var(--gold-glow); }
-.btn:active { transform: translateY(1px) scale(.98); }
-.btn svg { width: 18px; height: 18px; flex: none; transition: transform .25s var(--mola); }
-.btn:hover svg { transform: translateX(3px); }
-.btn.pulsa { animation: pulsa 2.4s ease-in-out infinite; }
-@keyframes pulsa { 50% { box-shadow: 0 0 0 1px rgba(255, 226, 138, .6) inset, 0 10px 60px -2px var(--gold-glow); } }
 .garantias { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 14px; color: var(--muted); font-size: 14px; }
 .garantias span { display: inline-flex; align-items: center; gap: 6px; }
 .garantias svg { width: 15px; height: 15px; color: var(--gold); }
+
+/* Botão dourado (só aparece se MOSTRAR_BOTAO_NO_ABERTO estiver ligado) */
+.btn { display: none; align-items: center; justify-content: center; gap: 12px; width: 100%; min-height: 56px; margin-top: 14px; padding: 0 20px; border-radius: 14px;
+  background: linear-gradient(180deg, var(--gold-2), var(--gold) 60%, #f2b01e); color: var(--on-gold);
+  font: 800 17px/1.1 "Plus Jakarta Sans", sans-serif; text-decoration: none; text-align: center;
+  box-shadow: 0 0 0 1px rgba(255, 226, 138, .5) inset, 0 10px 40px -8px var(--gold-glow); }
+.com-botao .estado[data-estado="aberto"] .btn { display: flex; }
 
 /* Faixa */
 .faixa { background: linear-gradient(90deg, #f2b01e, var(--gold-2), #f2b01e); color: var(--on-gold); overflow: hidden; white-space: nowrap; position: relative; z-index: 3; }
@@ -69,12 +63,28 @@ section { position: relative; }
 .faixa-trilho i { font-style: normal; opacity: .6; }
 @keyframes corre { to { transform: translateX(-50%); } }
 
-/* Contagem (só aparece com prazo no config) */
-.contagem { display: none; background: #120f06; border-bottom: 1px solid rgba(255, 200, 61, .35); text-align: center; padding: 10px 16px; }
-.contagem.ativa { display: block; }
-.contagem p { font-size: 12px; font-weight: 700; letter-spacing: .1em; color: var(--gold); }
-.relogio { display: inline-flex; gap: 6px; align-items: baseline; margin-top: 2px; font-weight: 800; font-size: 26px; font-variant-numeric: tabular-nums; }
-.relogio small { font-size: 10px; color: var(--muted); font-weight: 600; margin-right: 6px; }
+/* Barra do horário, no topo */
+.topo-hora { background: #120f06; border-bottom: 1px solid rgba(255, 200, 61, .35); text-align: center; padding: 9px 16px; font-size: 13px; font-weight: 700; letter-spacing: .06em; color: var(--gold); }
+.topo-hora b { font-variant-numeric: tabular-nums; color: var(--ink); letter-spacing: .02em; margin-left: 6px; }
+.topo-hora[data-estado="aberto"] { background: #06140c; border-color: rgba(61, 220, 132, .4); color: var(--verde); }
+
+/* O cartão das vagas: substitui o botão em toda a página */
+.estado { position: relative; border-radius: 18px; padding: 18px 20px 16px; text-align: center; background: linear-gradient(180deg, #1b170c, #111 70%); border: 1.5px solid rgba(255, 200, 61, .75); box-shadow: 0 0 50px -18px var(--gold-glow); }
+.estado-titulo { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+.estado-titulo::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; box-shadow: 0 0 10px currentColor; animation: pisca 1.6s ease-in-out infinite; }
+@keyframes pisca { 50% { opacity: .3; } }
+.estado-rotulo { margin-top: 8px; color: var(--muted); font-size: 14px; }
+.relogio { display: flex; justify-content: center; align-items: flex-start; gap: 8px; margin-top: 6px; }
+.relogio .u { min-width: 74px; padding: 8px 6px 6px; border-radius: 12px; background: rgba(255, 255, 255, .04); border: 1px solid rgba(255, 200, 61, .25); }
+.relogio b { display: block; font-size: 38px; line-height: 1; font-weight: 800; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.relogio small { display: block; margin-top: 4px; font-size: 11px; color: var(--muted); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.relogio i { font-style: normal; font-size: 30px; font-weight: 800; color: var(--gold); padding-top: 10px; }
+.estado-nota { margin-top: 12px; font-size: 14.5px; color: var(--ink); }
+.estado[data-estado="aberto"] { border-color: rgba(61, 220, 132, .75); box-shadow: 0 0 50px -16px var(--verde-glow); background: linear-gradient(180deg, #0b1a10, #111 70%); }
+.estado[data-estado="aberto"] .estado-titulo, .estado[data-estado="aberto"] .relogio i { color: var(--verde); }
+.estado[data-estado="aberto"] .relogio .u { border-color: rgba(61, 220, 132, .3); }
+.estado[data-estado="encerrado"] { border-color: #4a4a50; box-shadow: none; background: #111; }
+.estado[data-estado="encerrado"] .estado-titulo { color: #ff7a6b; }
 
 /* HERO */
 .hero { position: relative; overflow: hidden; padding: 36px 0 100px; isolation: isolate; }
@@ -91,7 +101,7 @@ section { position: relative; }
 .hero h1 .dourado { background: linear-gradient(180deg, var(--gold-2), var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .hero .sub { margin-top: 20px; font-size: 19px; line-height: 1.5; max-width: 30em; color: var(--muted); }
 .hero .sub b { color: var(--ink); font-weight: 700; }
-.hero .btn { margin-top: 30px; }
+.hero .estado { margin-top: 28px; max-width: 460px; }
 
 /* Cartão de embarque: a oferta impressa como passagem */
 .embarque { position: relative; display: grid; grid-template-columns: 1fr 92px; border-radius: 20px; background: linear-gradient(160deg, #1b170c, #0f0f11 55%); border: 1.5px solid rgba(255, 200, 61, .75);
@@ -100,7 +110,7 @@ section { position: relative; }
 .embarque::before, .embarque::after { content: ""; position: absolute; right: 80px; width: 24px; height: 24px; border-radius: 50%; background: var(--bg); border: 1.5px solid rgba(255, 200, 61, .75); }
 .embarque::before { top: -13px; clip-path: inset(50% 0 0 0); }
 .embarque::after { bottom: -13px; clip-path: inset(0 0 50% 0); }
-.emb-corpo { padding: 22px 24px 22px; border-right: 2px dashed rgba(255, 200, 61, .45); }
+.emb-corpo { padding: 22px 24px; border-right: 2px dashed rgba(255, 200, 61, .45); }
 .emb-topo { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 11px; font-weight: 800; letter-spacing: .14em; color: var(--gold); }
 .emb-topo img { width: 26px; height: 26px; }
 .emb-rota { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; margin: 18px 0 16px; }
@@ -131,8 +141,7 @@ section { position: relative; }
 .plano .valor { font-size: 34px; font-weight: 800; letter-spacing: -.03em; }
 .plano .valor small { font-size: 15px; color: var(--muted); font-weight: 600; letter-spacing: 0; }
 .plano.black { border: 1.5px solid rgba(255, 200, 61, .75); background: linear-gradient(170deg, #1b170c, var(--card) 50%); box-shadow: 0 0 60px -24px var(--gold-glow); }
-.plano.black h3 { color: var(--gold); }
-.plano.black .valor { color: var(--gold); }
+.plano.black h3, .plano.black .valor { color: var(--gold); }
 .conta-final { text-align: center; margin: 30px auto 0; max-width: 36em; font-size: 19px; line-height: 1.5; }
 .conta-final b { color: var(--gold); }
 
@@ -147,20 +156,6 @@ section { position: relative; }
 .check { width: 26px; height: 26px; border-radius: 8px; border: 1.5px solid var(--gold); background: rgba(255, 200, 61, .12); display: grid; place-items: center; margin-top: 1px; }
 .check svg { width: 13px; height: 13px; }
 
-/* Emissões dos membros */
-.emissoes { padding: 100px 0 90px; border-top: 1px solid var(--linha); overflow: hidden; }
-.carrossel { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 40px max(16px, (100vw - 1120px) / 2) 18px; scrollbar-width: none; }
-.carrossel::-webkit-scrollbar { display: none; }
-.carrossel figure { flex: 0 0 auto; scroll-snap-align: center; border-radius: 16px; overflow: hidden; border: 1px solid #34343a; background: var(--card); }
-.carrossel.prints figure { width: 250px; }
-.carrossel.posts figure { width: 330px; }
-.carrossel img { width: 100%; height: auto; }
-.setas { display: flex; justify-content: center; gap: 10px; margin-top: 6px; }
-.seta { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--linha); background: var(--card); display: grid; place-items: center; cursor: pointer; transition: border-color .2s, transform .2s var(--mola); }
-.seta:hover { border-color: var(--gold); }
-.seta:active { transform: scale(.94); }
-.seta svg { width: 18px; height: 18px; }
-
 /* Oferta */
 .oferta { padding: 100px 0 110px; border-top: 1px solid var(--linha); background: radial-gradient(50% 40% at 70% 30%, rgba(255, 196, 46, .1), transparent 70%); }
 .oferta-grade { display: grid; grid-template-columns: 1.15fr 1fr; gap: 24px; margin-top: 44px; align-items: start; }
@@ -170,29 +165,28 @@ section { position: relative; }
 .lista-cab .dourado { letter-spacing: .1em; }
 .item { display: grid; grid-template-columns: 26px 1fr auto; gap: 14px; align-items: start; padding: 15px 0; border-bottom: 1px solid var(--linha); }
 .item:last-child { border-bottom: 0; }
-.item .nome { font-weight: 700; font-size: 16.5px; line-height: 1.35; }
-.item .detalhe { color: var(--gold); font-weight: 600; font-size: 14px; }
+.item .nome { font-weight: 700; font-size: 16.5px; line-height: 1.35; text-wrap: balance; }
 .item .desc { color: var(--muted); font-size: 14px; line-height: 1.45; margin-top: 3px; }
 .item .preco { color: #8e8c93; font-weight: 700; font-size: 16px; text-decoration: line-through; text-decoration-thickness: 1.5px; white-space: nowrap; }
-.item.destaque { margin: 4px -12px; padding: 15px 12px; border: 1px dashed rgba(255, 200, 61, .6); border-radius: 12px; background: rgba(255, 200, 61, .05); }
 .tag { display: inline-block; vertical-align: 2px; margin-right: 8px; padding: 2px 7px; border-radius: 6px; background: var(--gold); color: #1a1406; font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
 
-.caixa { position: sticky; top: 24px; border-radius: 20px; border: 1.5px solid rgba(255, 200, 61, .8); background: linear-gradient(180deg, #1b170c, var(--card) 50%); padding: 36px 28px 26px; box-shadow: 0 0 70px -20px var(--gold-glow); text-align: center; }
+.caixa { position: sticky; top: 24px; border-radius: 20px; border: 1.5px solid rgba(255, 200, 61, .8); background: linear-gradient(180deg, #1b170c, var(--card) 50%); padding: 36px 26px 24px; box-shadow: 0 0 70px -20px var(--gold-glow); text-align: center; }
 .caixa .aba { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); white-space: nowrap; padding: 6px 14px; border-radius: 8px; background: var(--gold); color: var(--on-gold); font-size: 12px; font-weight: 800; letter-spacing: .1em; }
-.caixa h3 { font-size: 26px; letter-spacing: -.02em; }
+.calculo { border-radius: 14px; background: rgba(0, 0, 0, .35); border: 1px solid var(--linha); padding: 14px 16px; text-align: left; font-size: 15px; }
+.calculo p { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; color: var(--muted); }
+.calculo p b { color: var(--ink); font-weight: 700; white-space: nowrap; }
+.calculo .igual { margin-top: 6px; padding-top: 10px; border-top: 1px dashed #3a3a40; color: var(--ink); font-weight: 700; }
+.calculo .igual b { font-size: 20px; }
+.caixa h3 { margin-top: 22px; font-size: 24px; letter-spacing: -.02em; }
 .caixa h3 span { display: block; font-size: 15px; color: var(--muted); font-weight: 600; letter-spacing: 0; margin-top: 2px; }
-.caixa .de { margin-top: 18px; font-size: 16px; color: var(--muted); }
-.caixa .de b { font-weight: 700; }
-.caixa .parcela { margin-top: 6px; font-size: 22px; font-weight: 700; }
+.caixa .parcela { margin-top: 12px; font-size: 22px; font-weight: 700; }
 .caixa .por { font-size: 64px; font-weight: 800; letter-spacing: -.045em; line-height: 1; color: var(--gold); margin-top: 4px; text-shadow: 0 0 40px rgba(255, 196, 46, .35); }
 .caixa .por .js-ou { font-size: 22px; color: var(--ink); font-weight: 700; letter-spacing: 0; vertical-align: 12px; margin-right: 6px; }
 .caixa .por sup { font-size: 24px; vertical-align: 26px; margin-right: 4px; letter-spacing: 0; }
 .caixa .avista { color: var(--muted); font-size: 15px; margin-top: 6px; }
-.caixa .mes { display: inline-block; margin-top: 14px; padding: 6px 12px; border-radius: 999px; background: rgba(61, 220, 132, .1); color: var(--verde); font-size: 14px; font-weight: 700; }
-.caixa .btn { width: 100%; margin-top: 20px; }
+.caixa .mes { display: inline-block; margin-top: 12px; padding: 6px 12px; border-radius: 999px; background: rgba(61, 220, 132, .1); color: var(--verde); font-size: 14px; font-weight: 700; }
+.caixa .estado { margin-top: 20px; }
 .caixa .garantias { justify-content: center; }
-.caixa .seguro { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 14px; font-size: 13px; color: #85838a; }
-.caixa .seguro svg { width: 14px; height: 14px; }
 
 /* Mais um acesso */
 .mais-um { padding: 0 0 100px; }
@@ -205,17 +199,19 @@ section { position: relative; }
 .mais-um p { color: var(--muted); margin-top: 10px; max-width: 40em; }
 .mais-um p b { color: var(--ink); }
 
-/* Depoimentos */
-.depoimentos { padding: 100px 0 80px; border-top: 1px solid var(--linha); overflow: hidden; }
-.videos { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-top: 44px; }
-.video { position: relative; aspect-ratio: 9 / 16; border-radius: 16px; overflow: hidden; background: var(--card); border: 1px solid #34343a; }
+/* Depoimentos em vídeo */
+.depoimentos { padding: 100px 0 90px; border-top: 1px solid var(--linha); }
+.videos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 44px; }
+.video figure { position: relative; aspect-ratio: 9 / 16; border-radius: 16px; overflow: hidden; background: var(--card); border: 1px solid #34343a; }
 .video img { width: 100%; height: 100%; object-fit: cover; }
-.video button { position: absolute; inset: 0; border: 0; background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,.65)); cursor: pointer; display: grid; place-items: center; }
-.video .play { width: 58px; height: 58px; border-radius: 50%; background: rgba(255, 200, 61, .95); display: grid; place-items: center; box-shadow: 0 0 30px -4px var(--gold-glow); transition: transform .25s var(--mola); }
+.video button { position: absolute; inset: 0; border: 0; background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,.7)); cursor: pointer; display: grid; place-items: center; }
+.video .play { width: 60px; height: 60px; border-radius: 50%; background: rgba(255, 200, 61, .95); display: grid; place-items: center; box-shadow: 0 0 30px -4px var(--gold-glow); transition: transform .25s var(--mola); }
 .video button:hover .play { transform: scale(1.1); }
 .video .play svg { width: 22px; height: 22px; margin-left: 3px; color: var(--on-gold); }
 .video vturb-smartplayer { display: block; width: 100%; height: 100%; }
-.sub-titulo { text-align: center; font-size: 22px; letter-spacing: -.02em; margin-top: 70px; }
+.video figcaption { margin-top: 10px; }
+.video figcaption small { display: block; color: var(--gold); font-size: 11.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.video figcaption b { display: block; font-size: 15.5px; line-height: 1.3; margin-top: 2px; text-wrap: balance; }
 
 /* Suporte e garantia */
 .confianca { padding: 100px 0; border-top: 1px solid var(--linha); }
@@ -230,8 +226,8 @@ section { position: relative; }
 .final { position: relative; overflow: hidden; text-align: center; padding: 110px 0; border-top: 1px solid var(--linha);
   background: radial-gradient(50% 70% at 50% 100%, rgba(255, 196, 46, .2), transparent 70%); }
 .final h2 { font-size: clamp(30px, 4vw, 50px); letter-spacing: -.035em; line-height: 1.08; max-width: 17em; margin: 0 auto; }
-.final p { color: var(--muted); margin: 16px auto 0; max-width: 32em; }
-.final .btn { margin-top: 30px; }
+.final p.lead { margin-top: 16px; }
+.final .estado { max-width: 460px; margin: 30px auto 0; }
 .final .garantias { justify-content: center; }
 
 footer { border-top: 1px solid var(--linha); padding: 30px 0 40px; text-align: center; font-size: 13px; color: #85838a; }
@@ -251,35 +247,46 @@ footer p + p { margin-top: 8px; }
 @media (max-width: 980px) {
   .hero-grade, .vip-grade, .contas-grade, .oferta-grade, .confianca-grade { grid-template-columns: 1fr; }
   .embarque { max-width: 480px; margin: 10px auto 0; width: 100%; }
+  .hero .estado { margin-inline: auto; }
   .caixa { position: relative; top: 0; }
-  .videos { grid-template-columns: repeat(3, 1fr); }
+  .videos { grid-template-columns: repeat(2, 1fr); max-width: 640px; margin-inline: auto; }
 }
 @media (max-width: 640px) {
-  body { font-size: 15px; padding-bottom: 76px; }
+  body { font-size: 15px; padding-bottom: 66px; }
   .wrap { width: calc(100% - 32px); }
   .faixa-trilho { font-size: 12.5px; padding: 7px 0; }
-  .relogio { font-size: 22px; }
+  .topo-hora { font-size: 12.5px; padding: 8px 12px; letter-spacing: .03em; }
   .titulo { font-size: 24px; }
   .lead { font-size: 14.5px; margin-top: 10px; }
   .selo-topo { font-size: 12px; padding: 5px 11px; }
 
+  .estado { padding: 14px 12px 12px; border-radius: 16px; }
+  .estado-titulo { font-size: 11.5px; letter-spacing: .08em; }
+  .estado-rotulo { font-size: 13px; margin-top: 4px; }
+  .relogio { gap: 6px; }
+  .relogio .u { min-width: 64px; padding: 7px 4px 5px; border-radius: 10px; }
+  .relogio b { font-size: 30px; }
+  .relogio small { font-size: 10px; }
+  .relogio i { font-size: 24px; padding-top: 8px; }
+  .estado-nota { font-size: 13px; margin-top: 10px; }
+
   .hero { padding: 16px 0 44px; text-align: center; }
   .hero::before { background: radial-gradient(90% 32% at 50% 30%, rgba(255, 196, 46, .16), transparent 72%); }
-  .logo { display: flex; justify-content: center; margin: 0 auto 18px; min-height: 44px; font-size: 15px; gap: 8px; }
+  .logo { display: flex; justify-content: center; margin: 0 auto 16px; min-height: 44px; font-size: 15px; gap: 8px; }
   .logo-globo { width: 28px; height: 28px; }
-  .globo { width: 460px; right: auto; left: 50%; margin-left: -230px; top: 360px; opacity: .22;
+  .globo { width: 460px; right: auto; left: 50%; margin-left: -230px; top: 420px; opacity: .22;
     -webkit-mask-image: linear-gradient(transparent, #000 30%, #000 60%, transparent); mask-image: linear-gradient(transparent, #000 30%, #000 60%, transparent); }
   .hero-grade { gap: 26px; }
-  .hero .selo-topo { margin: 0 auto 14px; }
+  .hero .selo-topo { margin: 0 auto 12px; }
   .hero h1 { font-size: 29px; line-height: 1.12; letter-spacing: -.03em; }
   .hero .sub { font-size: 15px; margin: 12px auto 0; max-width: 23em; }
-  .hero .btn { width: 100%; min-height: 56px; margin-top: 22px; font-size: 16px; padding: 0 18px; }
+  .hero .estado { margin-top: 20px; }
   .hero .garantias { justify-content: center; font-size: 12.5px; margin-top: 10px; }
 
   .embarque { grid-template-columns: 1fr 58px; border-radius: 16px; transform: rotate(-1.5deg); text-align: left; }
   .embarque::before, .embarque::after { right: 47px; width: 20px; height: 20px; }
   .embarque::before { top: -11px; } .embarque::after { bottom: -11px; }
-  .emb-corpo { padding: 16px 16px 16px; }
+  .emb-corpo { padding: 16px; }
   .emb-topo { font-size: 10px; letter-spacing: .1em; }
   .emb-topo img { width: 20px; height: 20px; }
   .emb-rota { margin: 12px 0 10px; gap: 8px; }
@@ -317,37 +324,28 @@ footer p + p { margin-top: 8px; }
   .check { width: 22px; height: 22px; border-radius: 6px; }
   .check svg { width: 11px; height: 11px; }
 
-  .emissoes { padding: 56px 0 48px; }
-  .carrossel { padding: 22px 16px 14px; gap: 12px; }
-  .carrossel.prints figure { width: 62vw; max-width: 250px; }
-  .carrossel.posts figure { width: 80vw; max-width: 330px; }
-  .setas { display: none; }
-
-  .oferta { padding: 56px 0 56px; }
+  .oferta { padding: 56px 0; }
   .oferta-grade { margin-top: 26px; gap: 26px; }
-  .lista { padding: 14px 14px 8px; border-radius: 14px; }
+  .lista { padding: 14px 14px 6px; border-radius: 14px; }
   .lista + .lista { margin-top: 12px; }
   .lista-cab { font-size: 10px; padding-bottom: 10px; }
-  .item { grid-template-columns: 20px 1fr auto; gap: 10px; padding: 11px 0; align-items: center; }
-  .item.destaque { margin: 4px -8px; padding: 11px 8px; }
+  .item { grid-template-columns: 20px 1fr auto; gap: 10px; padding: 12px 0; }
   .item .check { width: 20px; height: 20px; }
-  .item .nome { font-size: 14px; font-weight: 600; line-height: 1.3; }
-  .item .detalhe { display: block; font-size: 12.5px; }
-  .item .detalhe-ponto { display: none; }
-  .item .desc { display: none; }
+  .item .nome { font-size: 14.5px; line-height: 1.3; }
+  .item .desc { font-size: 12.5px; line-height: 1.4; }
   .tag { font-size: 9.5px; padding: 2px 6px; margin-right: 6px; vertical-align: 1px; }
   .item .preco { font-size: 13px; }
-  .caixa { padding: 30px 16px 20px; border-radius: 16px; }
+  .caixa { padding: 30px 14px 18px; border-radius: 16px; }
   .caixa .aba { font-size: 10.5px; top: -13px; }
-  .caixa h3 { font-size: 21px; }
+  .calculo { font-size: 13.5px; padding: 12px 12px; }
+  .calculo .igual b { font-size: 18px; }
+  .caixa h3 { font-size: 20px; margin-top: 18px; }
   .caixa h3 span { font-size: 13.5px; }
-  .caixa .de { font-size: 14.5px; margin-top: 14px; }
   .caixa .parcela { font-size: 18px; }
   .caixa .por { font-size: 54px; }
   .caixa .por sup { font-size: 20px; vertical-align: 22px; }
   .caixa .avista { font-size: 13.5px; }
-  .caixa .mes { font-size: 12.5px; margin-top: 12px; }
-  .caixa .btn { min-height: 56px; font-size: 16px; margin-top: 16px; padding: 0 14px; }
+  .caixa .mes { font-size: 12.5px; }
   .caixa .garantias { font-size: 12.5px; }
 
   .mais-um { padding: 0 0 56px; }
@@ -358,11 +356,13 @@ footer p + p { margin-top: 8px; }
   .mais-um h2 { font-size: 22px; }
   .mais-um p { font-size: 14.5px; }
 
-  .depoimentos { padding: 56px 0 44px; }
-  .videos { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 24px; }
-  .video { border-radius: 12px; }
-  .video .play { width: 48px; height: 48px; }
-  .sub-titulo { font-size: 18px; margin-top: 44px; }
+  .depoimentos { padding: 56px 0 50px; }
+  .videos { gap: 18px 10px; margin-top: 24px; }
+  .video figure { border-radius: 12px; }
+  .video .play { width: 50px; height: 50px; }
+  .video figcaption { margin-top: 8px; }
+  .video figcaption small { font-size: 10px; }
+  .video figcaption b { font-size: 13.5px; }
 
   .confianca { padding: 56px 0; }
   .confianca-grade { gap: 14px; }
@@ -374,42 +374,58 @@ footer p + p { margin-top: 8px; }
 
   .final { padding: 56px 0; }
   .final h2 { font-size: 24px; }
-  .final p { font-size: 14px; margin-top: 10px; }
-  .final .btn { width: 100%; min-height: 56px; font-size: 16px; padding: 0 18px; margin-top: 20px; }
+  .final .estado { margin-top: 22px; }
   footer { font-size: 11.5px; padding: 22px 0 30px; }
 
-  .barra { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; align-items: center; gap: 12px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  .barra { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
     background: rgba(8, 8, 9, .94); border-top: 1px solid rgba(255, 200, 61, .35); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
     transform: translateY(110%); transition: transform .4s var(--mola); }
   .barra.ativa { transform: none; }
-  .barra .txt { line-height: 1.2; flex: none; }
+  .barra .txt { line-height: 1.2; }
   .barra .txt b { display: block; color: var(--gold); font-size: 20px; letter-spacing: -.02em; }
   .barra .txt small { font-size: 11.5px; color: var(--muted); }
-  .barra .btn { flex: 1; min-height: 50px; padding: 0 12px; font-size: 15px; border-radius: 12px; }
+  .barra .hora { text-align: right; line-height: 1.2; }
+  .barra .hora small { display: block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--gold); }
+  .barra .hora b { font-size: 20px; font-variant-numeric: tabular-nums; }
+  .barra[data-estado="aberto"] .hora small { color: var(--verde); }
+  .barra[data-estado="encerrado"] .hora small { color: #ff7a6b; }
 }
 @media (max-width: 360px) {
   .hero h1 { font-size: 25px; }
   .hero .sub { font-size: 14px; }
-  .btn, .hero .btn, .final .btn, .caixa .btn { font-size: 14.5px; gap: 8px; padding: 0 12px; }
+  .relogio .u { min-width: 56px; }
+  .relogio b { font-size: 26px; }
   .emb-rota b { font-size: 19px; }
   .emb-tarifa .por { font-size: 30px; }
   .caixa .por { font-size: 46px; }
-  .barra .txt b { font-size: 17px; }
+  .barra .txt b, .barra .hora b { font-size: 17px; }
 }
 </style>
 </head>
 <body>
 
 <div class="faixa" aria-hidden="true"><div class="faixa-trilho">
-  <span>A oferta da Super Black Friday chegou</span><i>✦</i><span>2 anos pelo preço de 1</span><i>✦</i><span>Mais um acesso pra quem você quiser</span><i>✦</i><span>Garantia de 7 dias</span><i>✦</i>
-  <span>A oferta da Super Black Friday chegou</span><i>✦</i><span>2 anos pelo preço de 1</span><i>✦</i><span>Mais um acesso pra quem você quiser</span><i>✦</i><span>Garantia de 7 dias</span><i>✦</i>
-  <span>A oferta da Super Black Friday chegou</span><i>✦</i><span>2 anos pelo preço de 1</span><i>✦</i><span>Mais um acesso pra quem você quiser</span><i>✦</i><span>Garantia de 7 dias</span><i>✦</i>
+  <span>A oferta da Super Black Friday chegou</span><i>✦</i><span>2 anos pelo preço de 1</span><i>✦</i><span>Mais um acesso pra quem você quiser</span><i>✦</i><span>Vagas a partir das 19h</span><i>✦</i>
+  <span>A oferta da Super Black Friday chegou</span><i>✦</i><span>2 anos pelo preço de 1</span><i>✦</i><span>Mais um acesso pra quem você quiser</span><i>✦</i><span>Vagas a partir das 19h</span><i>✦</i>
+  <span>A oferta da Super Black Friday chegou</span><i>✦</i><span>2 anos pelo preço de 1</span><i>✦</i><span>Mais um acesso pra quem você quiser</span><i>✦</i><span>Vagas a partir das 19h</span><i>✦</i>
 </div></div>
 
-<div class="contagem js-contagem" role="timer" aria-live="off">
-  <p>A OFERTA ACABA EM</p>
-  <div class="relogio"><span class="js-d">00</span><small>dias</small><span class="js-h">00</span><small>h</small><span class="js-m">00</span><small>min</small><span class="js-s">00</span><small>s</small></div>
-</div>
+<div class="topo-hora js-topo-hora" aria-hidden="true"><span class="js-topo-txt">As vagas abrem às 19h</span><b class="js-topo-relogio"></b></div>
+
+<!-- Modelo do cartão das vagas. O script copia para o topo, a caixa de preço e o fim da página. -->
+<template id="modelo-estado">
+  <div class="estado" data-estado="antes" role="timer" aria-live="off">
+    <p class="estado-titulo js-e-titulo">As vagas abrem hoje às 19h</p>
+    <p class="estado-rotulo js-e-rotulo">Faltam</p>
+    <div class="relogio">
+      <div class="u"><b class="js-e-h">00</b><small>horas</small></div><i>:</i>
+      <div class="u"><b class="js-e-m">00</b><small>min</small></div><i>:</i>
+      <div class="u"><b class="js-e-s">00</b><small>seg</small></div>
+    </div>
+    <p class="estado-nota js-e-nota"></p>
+    <a class="btn js-comprar" href="#">Quero garantir a minha vaga</a>
+  </div>
+</template>
 
 <header class="hero">
   <svg class="globo" viewBox="0 0 400 400" aria-hidden="true">
@@ -425,9 +441,8 @@ footer p + p { margin-top: 8px; }
       <div>
         <p class="selo-topo sobe">A oferta da Super Black Friday chegou</p>
         <h1 class="sobe" style="--d:70ms"><span class="dourado">2 anos</span> de Comunidade VIP, APP e Workshop por <span class="dourado js-preco">R$ 397</span></h1>
-        <p class="sub sobe" style="--d:140ms">Só a Comunidade VIP custa <b class="js-vip-ano">R$ 297 por ano</b>. Na Super Black Friday você leva tudo isso por 2 anos e ainda coloca <b>mais uma pessoa no VIP</b>.</p>
-        <a class="btn pulsa js-comprar sobe" style="--d:210ms" href="#oferta">Quero aproveitar a oferta
-          <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h11M10 4.5L14.5 9 10 13.5" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <p class="sub sobe" style="--d:140ms">Só a Comunidade VIP custa <b class="js-vip-ano">R$ 397 por ano</b>. Na Super Black Friday você leva tudo isso por 2 anos e ainda coloca <b>mais uma pessoa no VIP</b>.</p>
+        <div class="js-lugar-estado sobe" style="--d:210ms"></div>
         <div class="garantias sobe" style="--d:260ms">
           <span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5l5 2v4c0 3.2-2.2 5.6-5 7-2.8-1.4-5-3.8-5-7v-4z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>Garantia de 7 dias</span>
           <span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M9 1.5L3.5 9H8l-1 5.5L12.5 7H8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Acesso na hora</span>
@@ -449,7 +464,7 @@ footer p + p { margin-top: 8px; }
             <div><small>CLASSE</small><b>VIP</b></div>
           </div>
           <div class="emb-tarifa">
-            <div><small>TARIFA NORMAL</small><span class="de riscado js-total">R$ 3.170</span></div>
+            <div><small>TARIFA NORMAL</small><span class="de riscado js-ancora">R$ 8.716</span></div>
             <div><small>TARIFA BLACK</small><span class="por"><sup>R$</sup><span class="js-preco-num">397</span></span></div>
           </div>
         </div>
@@ -471,21 +486,21 @@ footer p + p { margin-top: 8px; }
           <li class="nao"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 6l8 8M14 6l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Sem o novo APP</li>
           <li class="nao"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 6l8 8M14 6l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Sem o Workshop ao vivo</li>
         </ul>
-        <p class="valor js-vip-valor">R$ 297 <small>por ano</small></p>
+        <p class="valor js-vip-valor">R$ 397 <small>por ano</small></p>
       </div>
       <div class="plano black sobe" style="--d:160ms">
         <h3>Super Black Friday</h3>
         <ul>
           <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.2 3L15 6.5" stroke="#ffc83d" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>2 anos</b> de acesso</span></li>
           <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.2 3L15 6.5" stroke="#ffc83d" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Você <b>e mais uma pessoa</b> no VIP</span></li>
-          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.2 3L15 6.5" stroke="#ffc83d" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>O novo <b>APP Central de Voos</b></span></li>
-          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.2 3L15 6.5" stroke="#ffc83d" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>O <b>Workshop Desvendando as Milhas</b>, ao vivo</span></li>
-          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.2 3L15 6.5" stroke="#ffc83d" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Monitoramento com IA, curso, estratégias e suporte jurídico</span></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.2 3L15 6.5" stroke="#ffc83d" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>O novo <b>APP Central de Voos</b>, com monitoramento por IA</span></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.2 3L15 6.5" stroke="#ffc83d" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>O <b>Workshop O Segredo das Passagens Baratas</b>, ao vivo</span></li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3.2 3L15 6.5" stroke="#ffc83d" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>4 bônus: curso de milhas, estratégias, suporte jurídico e guia dos cartões</span></li>
         </ul>
         <p class="valor js-preco-plano">R$ 397 <small>por 2 anos</small></p>
       </div>
     </div>
-    <p class="conta-final sobe">Por <b class="js-diferenca">R$ 100</b> a mais que um ano de VIP, você ganha mais um ano inteiro, o app, o workshop e ainda leva alguém com você.</p>
+    <p class="conta-final sobe js-conta-final">Pelo <b>mesmo preço</b> de um ano de VIP, você ganha mais um ano inteiro, o app, o workshop e ainda leva alguém com você.</p>
   </div>
 </section>
 
@@ -496,7 +511,7 @@ footer p + p { margin-top: 8px; }
       <p class="lead sobe" style="--d:80ms">Você para de procurar passagem. As promoções chegam no seu celular, saindo da sua região, e a nossa equipe te ajuda a emitir.</p>
     </div>
     <ul class="checklist">
-      <li class="sobe"><span class="check" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2 6.3l2.6 2.5L10 3.3" stroke="#ffc83d" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Mais de 150 promoções por dia</b><span>Nacionais e internacionais, saindo de todos os aeroportos do Brasil.</span></div></li>
+      <li class="sobe"><span class="check" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2 6.3l2.6 2.5L10 3.3" stroke="#ffc83d" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Mais de 1.000 promoções por semana</b><span>Nacionais e internacionais, com todas as datas disponíveis, saindo de todos os aeroportos do Brasil.</span></div></li>
       <li class="sobe" style="--d:60ms"><span class="check" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2 6.3l2.6 2.5L10 3.3" stroke="#ffc83d" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Grupos separados por região</b><span>Você recebe as passagens que saem perto de você: Sul, Sudeste, Centro-Oeste, Norte e Nordeste.</span></div></li>
       <li class="sobe" style="--d:120ms"><span class="check" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2 6.3l2.6 2.5L10 3.3" stroke="#ffc83d" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Não precisa ter milhas</b><span>Você paga no Pix ou no cartão e a passagem sai no seu nome, no site da companhia.</span></div></li>
       <li class="sobe" style="--d:180ms"><span class="check" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2 6.3l2.6 2.5L10 3.3" stroke="#ffc83d" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Suporte humano no WhatsApp</b><span>Gente de verdade pra tirar dúvida e te ajudar a emitir.</span></div></li>
@@ -505,51 +520,39 @@ footer p + p { margin-top: 8px; }
   </div>
 </section>
 
-<section class="emissoes" aria-labelledby="t-emissoes">
-  <div class="wrap">
-    <h2 id="t-emissoes" class="titulo sobe">Veja o que os membros estão emitindo</h2>
-    <p class="lead sobe" style="--d:80ms">Conversas reais com a nossa equipe, com o valor que cada um pagou.</p>
-  </div>
-  <div class="carrossel prints js-carrossel" id="prints">
-    <figure><img src="midia/depoimentos/economia-santiago.webp" alt="Conversa de membro que emitiu Salvador para Santiago, equivalente a R$ 632" width="560" height="996" loading="lazy"></figure>
-    <figure><img src="midia/depoimentos/economia-aracaju.webp" alt="Conversa de membro que emitiu São Paulo para Aracaju, equivalente a R$ 288" width="560" height="996" loading="lazy"></figure>
-    <figure><img src="midia/depoimentos/economia-istambul.webp" alt="Conversa de membro que emitiu Istambul de executiva, equivalente a R$ 2.900" width="560" height="996" loading="lazy"></figure>
-    <figure><img src="midia/depoimentos/economia-barcelona.webp" alt="Conversa de membro que emitiu Barcelona, equivalente a R$ 1.800" width="560" height="996" loading="lazy"></figure>
-    <figure><img src="midia/depoimentos/economia-losangeles.webp" alt="Conversa de membro que emitiu Los Angeles e Recife" width="560" height="996" loading="lazy"></figure>
-  </div>
-  <div class="setas"><button class="seta" type="button" data-alvo="prints" data-dir="-1" aria-label="Anterior"><svg viewBox="0 0 18 18"><path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="seta" type="button" data-alvo="prints" data-dir="1" aria-label="Próximo"><svg viewBox="0 0 18 18"><path d="M7 4l5 5-5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
-</section>
-
 <section class="oferta" id="oferta" aria-labelledby="t-oferta">
   <div class="wrap">
     <p class="selo-topo sobe">A melhor condição que a Central de Voos já fez</p>
-    <h2 id="t-oferta" class="titulo sobe" style="--d:70ms" >Tudo o que você leva na <span class="dourado">Super Black Friday</span></h2>
+    <h2 id="t-oferta" class="titulo sobe" style="--d:70ms">Tudo o que você leva na <span class="dourado">Super Black Friday</span></h2>
     <div class="oferta-grade">
       <div class="sobe" style="--d:120ms">
         <div class="lista">
-          <div class="lista-cab"><span>O que você vai acessar</span><span>Preço normal</span></div>
+          <div class="lista-cab"><span>O que você vai acessar</span><span>Valor por ano</span></div>
           <div class="js-principais"></div>
         </div>
         <div class="lista">
-          <div class="lista-cab"><span class="dourado">+ Bônus da Black</span><span>Preço normal</span></div>
+          <div class="lista-cab"><span class="dourado">+ Bônus exclusivos da Black</span><span>Valor por ano</span></div>
           <div class="js-bonus"></div>
         </div>
       </div>
       <aside class="caixa sobe" style="--d:200ms" aria-label="Preço da Super Black Friday">
         <span class="aba">SUPER BLACK FRIDAY</span>
-        <h3>2 anos de acesso<span>pra você e mais uma pessoa</span></h3>
-        <p class="de">De <b class="riscado js-total">R$ 3.170</b> por apenas:</p>
+        <div class="calculo">
+          <p>Tudo isso, por 1 ano<b class="js-soma">R$ 2.179</b></p>
+          <p>Por 2 anos<b>× 2</b></p>
+          <p>Pra você e mais uma pessoa<b>× 2</b></p>
+          <p class="igual">Valeria<b class="riscado js-ancora">R$ 8.716</b></p>
+        </div>
+        <h3>Na Super Black Friday<span>2 anos de acesso, pra você e mais uma pessoa</span></h3>
         <p class="parcela js-parcela">12x de R$ 40,34</p>
         <p class="por"><span class="js-ou">ou </span><sup>R$</sup><span class="js-preco-num">397</span></p>
         <p class="avista">à vista</p>
         <p class="mes js-mes">Dá R$ 16,54 por mês, pra duas pessoas</p>
-        <a class="btn pulsa js-comprar" href="#oferta">Quero aproveitar a oferta
-          <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h11M10 4.5L14.5 9 10 13.5" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="js-lugar-estado"></div>
         <div class="garantias">
           <span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5l5 2v4c0 3.2-2.2 5.6-5 7-2.8-1.4-5-3.8-5-7v-4z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>Garantia de 7 dias</span>
           <span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M9 1.5L3.5 9H8l-1 5.5L12.5 7H8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Acesso na hora</span>
         </div>
-        <p class="seguro"><svg viewBox="0 0 14 14" aria-hidden="true"><rect x="2.5" y="6" width="9" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M4.5 6V4.5a2.5 2.5 0 015 0V6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Pagamento seguro pela Hub.la · Pix ou cartão</p>
       </aside>
     </div>
   </div>
@@ -564,7 +567,7 @@ footer p + p { margin-top: 8px; }
       </div>
       <div>
         <h2 id="t-mais-um">Bônus que nunca existiu: <span class="dourado">leve mais uma pessoa</span></h2>
-        <p>Só na Super Black Friday, a sua compra vale por dois. Você coloca <b>quem você quiser</b> na Comunidade VIP, pelos mesmos 2 anos: o seu marido, a sua esposa, a sua mãe, um amigo. Viajar fica mais barato e muito mais gostoso.</p>
+        <p>Só na Super Black Friday, a sua compra vale por dois. Você coloca <b>quem você quiser</b> na Comunidade VIP, com tudo o que você tem, pelos mesmos 2 anos: o seu marido, a sua esposa, a sua mãe, um amigo. Viajar fica mais barato e muito mais gostoso.</p>
       </div>
     </div>
   </div>
@@ -572,20 +575,10 @@ footer p + p { margin-top: 8px; }
 
 <section class="depoimentos" aria-labelledby="t-depoimentos">
   <div class="wrap">
-    <h2 id="t-depoimentos" class="titulo sobe">Veja o que dizem os membros da Central</h2>
-    <p class="lead sobe" style="--d:80ms">Toque no vídeo pra assistir.</p>
+    <h2 id="t-depoimentos" class="titulo sobe">Quem faz parte conta</h2>
+    <p class="lead sobe" style="--d:80ms">Membros da Central contando a viagem que saiu do papel. Toque no vídeo pra assistir.</p>
     <div class="videos js-videos"></div>
-    <h3 class="sub-titulo sobe">E na comunidade, todo dia tem alguém contando a viagem</h3>
   </div>
-  <div class="carrossel posts js-carrossel" id="posts">
-    <figure><img src="midia/depoimentos/social-mariana-alves-ribeiro.webp" alt="Post de Mariana Alves Ribeiro sobre a viagem para Santorini" width="920" height="1124" loading="lazy"></figure>
-    <figure><img src="midia/depoimentos/social-roberto-tanaka.webp" alt="Post de Roberto Tanaka sobre a viagem de executiva para o Japão" width="920" height="1124" loading="lazy"></figure>
-    <figure><img src="midia/depoimentos/social-juliana-nascimento.webp" alt="Post de Juliana Nascimento sobre a viagem para a Disney com a família" width="920" height="1086" loading="lazy"></figure>
-    <figure><img src="midia/depoimentos/social-beatriz-cardoso-moura.webp" alt="Post de Beatriz Cardoso Moura sobre a viagem para Londres" width="920" height="1124" loading="lazy"></figure>
-    <figure><img src="midia/depoimentos/social-vinicius-andrade-lopes.webp" alt="Post de Vinícius Andrade Lopes sobre a viagem para Cancún" width="920" height="1163" loading="lazy"></figure>
-    <figure><img src="midia/depoimentos/social-marcos-henrique-vasconcelos.webp" alt="Post de Marcos Henrique Vasconcelos sobre a viagem para Cartagena" width="920" height="1124" loading="lazy"></figure>
-  </div>
-  <div class="setas"><button class="seta" type="button" data-alvo="posts" data-dir="-1" aria-label="Anterior"><svg viewBox="0 0 18 18"><path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="seta" type="button" data-alvo="posts" data-dir="1" aria-label="Próximo"><svg viewBox="0 0 18 18"><path d="M7 4l5 5-5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
 </section>
 
 <section class="confianca" aria-label="Suporte e garantia">
@@ -610,9 +603,8 @@ footer p + p { margin-top: 8px; }
 <section class="final" aria-labelledby="t-final">
   <div class="wrap">
     <h2 id="t-final" class="sobe">A Super Black Friday é a melhor condição que a Central de Voos já fez.</h2>
-    <p class="sobe js-final-txt" style="--d:80ms">2 anos de Comunidade VIP, APP, Workshop e mais um acesso pra quem você quiser, por R$ 397.</p>
-    <a class="btn pulsa js-comprar sobe" style="--d:150ms" href="#oferta">Quero aproveitar a oferta
-      <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h11M10 4.5L14.5 9 10 13.5" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <p class="lead sobe js-final-txt" style="--d:80ms">2 anos de Comunidade VIP, APP, Workshop, 4 bônus e mais um acesso pra quem você quiser, por R$ 397.</p>
+    <div class="js-lugar-estado sobe" style="--d:150ms"></div>
     <div class="garantias sobe" style="--d:200ms">
       <span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5l5 2v4c0 3.2-2.2 5.6-5 7-2.8-1.4-5-3.8-5-7v-4z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>Garantia de 7 dias</span>
       <span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M9 1.5L3.5 9H8l-1 5.5L12.5 7H8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Acesso na hora</span>
@@ -623,13 +615,13 @@ footer p + p { margin-top: 8px; }
 <footer>
   <div class="wrap">
     <p>© 2026 Central de Voos Ltda – EPP · CNPJ 54.976.724/0001-02 · São Paulo/SP · Cadastur regular</p>
-    <p>Promoções sujeitas à disponibilidade das companhias aéreas.</p>
+    <p>Promoções sujeitas à disponibilidade das companhias aéreas. Horários de Brasília.</p>
   </div>
 </footer>
 
 <div class="barra js-barra" aria-hidden="true">
   <div class="txt"><b class="js-barra-preco">R$ 397</b><small>2 anos · você + 1</small></div>
-  <a class="btn js-comprar" href="#oferta" tabindex="-1">Quero aproveitar</a>
+  <div class="hora"><small class="js-barra-rotulo">Vagas abrem em</small><b class="js-barra-relogio">00:00:00</b></div>
 </div>
 
 <script>
@@ -637,11 +629,7 @@ document.documentElement.classList.add("js");
 const C = window.CONFIG || {};
 const brl = n => "R$ " + n.toLocaleString("pt-BR", { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 });
 const $ = s => document.querySelector(s), $$ = s => document.querySelectorAll(s);
-const preco = C.PRECO || 397, vipAno = C.PRECO_VIP_ANO || 297;
-
-// Botões: vão para o checkout; sem link configurado, descem até a caixa de preço
-const temLink = C.CHECKOUT && /^https?:/.test(C.CHECKOUT);
-$$(".js-comprar").forEach(a => { if (temLink) { a.href = C.CHECKOUT + location.search; a.rel = "noopener"; } });
+const preco = C.PRECO || 397, vipAno = C.PRECO_VIP_ANO || 397;
 
 // Preços e textos que dependem do config.js
 $$(".js-preco").forEach(e => e.textContent = brl(preco));
@@ -649,52 +637,87 @@ $$(".js-preco-num").forEach(e => e.textContent = preco.toLocaleString("pt-BR"));
 $(".js-vip-ano").textContent = brl(vipAno) + " por ano";
 $(".js-vip-valor").innerHTML = brl(vipAno) + " <small>por ano</small>";
 $(".js-preco-plano").innerHTML = brl(preco) + " <small>por 2 anos</small>";
-$(".js-diferenca").textContent = brl(preco - vipAno);
+if (preco > vipAno) $(".js-conta-final").innerHTML = `Por <b>${brl(preco - vipAno)}</b> a mais que um ano de VIP, você ganha mais um ano inteiro, o app, o workshop e ainda leva alguém com você.`;
 $(".js-barra-preco").textContent = brl(preco);
 $(".js-mes").textContent = "Dá " + brl(Math.round(preco / 24 * 100) / 100) + " por mês, pra duas pessoas";
-$(".js-final-txt").textContent = "2 anos de Comunidade VIP, APP, Workshop e mais um acesso pra quem você quiser, por " + brl(preco) + ".";
+$(".js-final-txt").textContent = "2 anos de Comunidade VIP, APP, Workshop, 4 bônus e mais um acesso pra quem você quiser, por " + brl(preco) + ".";
 if (C.PARCELA) $(".js-parcela").textContent = C.PARCELA;
-else { $(".js-parcela").textContent = brl(preco); $(".js-parcela").style.display = "none"; $(".js-ou").textContent = ""; $(".avista").textContent = "à vista ou em até 12x no cartão"; }
+else { $(".js-parcela").style.display = "none"; $(".js-ou").textContent = ""; $(".avista").textContent = "à vista ou em até 12x no cartão"; }
 
-// Pilha de valor
+// Pilha de valor: valor por ano de cada entrega; a âncora é a soma × 2 anos × 2 acessos
 const check = '<span class="check" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M2 6.3l2.6 2.5L10 3.3" stroke="#ffc83d" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
-const linha = e => `<div class="item${e.tag === "Só na Black" ? " destaque" : ""}">${check}<div><div class="nome">${e.tag ? `<span class="tag">${e.tag}</span>` : ""}${e.nome}${e.detalhe ? ` <span class="detalhe"><span class="detalhe-ponto">· </span>${e.detalhe}</span>` : ""}</div><div class="desc">${e.desc}</div></div><div class="preco">${brl(e.valor)}</div></div>`;
+const linha = e => `<div class="item">${check}<div><div class="nome">${e.tag ? `<span class="tag">${e.tag}</span>` : ""}${e.nome}</div><div class="desc">${e.desc}</div></div><div class="preco">${brl(e.valor)}</div></div>`;
 const principais = C.PRINCIPAIS || [], bonus = C.BONUS || [];
 $(".js-principais").innerHTML = principais.map(linha).join("");
 $(".js-bonus").innerHTML = bonus.map(linha).join("");
-const total = [...principais, ...bonus].reduce((s, e) => s + e.valor, 0);
-$$(".js-total").forEach(e => e.textContent = brl(total));
+const soma = [...principais, ...bonus].reduce((s, e) => s + e.valor, 0);
+$(".js-soma").textContent = brl(soma);
+$$(".js-ancora").forEach(e => e.textContent = brl(soma * 4));
+
+// Cartão das vagas: o mesmo modelo no topo, na caixa de preço e no fim
+const modelo = $("#modelo-estado");
+$$(".js-lugar-estado").forEach(l => l.appendChild(modelo.content.cloneNode(true)));
+const temBotao = C.MOSTRAR_BOTAO_NO_ABERTO && /^https?:/.test(C.CHECKOUT || "");
+if (temBotao) { document.body.classList.add("com-botao"); $$(".js-comprar").forEach(a => { a.href = C.CHECKOUT + location.search; a.rel = "noopener"; }); }
+
+// Horário de Brasília (UTC−3, sem horário de verão)
+const V = C.VAGAS || {}, T = C.TEXTOS || {};
+const min = s => { const [h, m] = s.split(":").map(Number); return h * 60 + m; };
+const ABRE = min(V.ABRE || "19:00"), FECHA = min(V.FECHA || "00:10"), ENC = min(V.ENCERRADO_ATE || "12:00");
+const horaAbre = (V.ABRE || "19:00").replace(/:00$/, "h").replace(":", "h");
+const z = n => String(n).padStart(2, "0");
+function situacao() {
+  const agora = Date.now(), br = new Date(agora - 3 * 3600e3);
+  const s = br.getUTCHours() * 3600 + br.getUTCMinutes() * 60 + br.getUTCSeconds();
+  const dia = 86400, abre = ABRE * 60, fecha = FECHA * 60, enc = ENC * 60;
+  // A janela aberta vai das 19h até 00:10 do dia seguinte
+  const aberto = fecha < abre ? (s >= abre || s < fecha) : (s >= abre && s < fecha);
+  if (aberto) return { estado: "aberto", falta: ((fecha - s) % dia + dia) % dia };
+  const falta = ((abre - s) % dia + dia) % dia;
+  return { estado: s >= fecha && s < enc ? "encerrado" : "antes", falta };
+}
+const TITULO = { antes: `As vagas abrem hoje às ${horaAbre}`, aberto: "As vagas estão abertas!", encerrado: "As vagas de hoje foram encerradas" };
+const ROTULO = { antes: "Faltam", aberto: "Fecham em", encerrado: `As próximas abrem às ${horaAbre}. Faltam` };
+const TOPO = { antes: `As vagas abrem às ${horaAbre} · faltam`, aberto: "Vagas abertas · fecham em", encerrado: `Vagas encerradas · próximas às ${horaAbre}, em` };
+const BARRA = { antes: "Vagas abrem em", aberto: "Vagas fecham em", encerrado: "Vagas encerradas" };
+let ultimo = "";
+function atualizaHora() {
+  const { estado, falta } = situacao();
+  const h = Math.floor(falta / 3600), m = Math.floor(falta % 3600 / 60), s = falta % 60;
+  $$(".estado").forEach(el => {
+    if (estado !== ultimo) {
+      el.dataset.estado = estado;
+      el.querySelector(".js-e-titulo").textContent = TITULO[estado];
+      el.querySelector(".js-e-rotulo").textContent = ROTULO[estado];
+      el.querySelector(".js-e-nota").textContent = T[estado] || "";
+    }
+    el.querySelector(".js-e-h").textContent = z(h); el.querySelector(".js-e-m").textContent = z(m); el.querySelector(".js-e-s").textContent = z(s);
+  });
+  const relogio = `${z(h)}:${z(m)}:${z(s)}`;
+  $(".js-topo-hora").dataset.estado = estado; $(".js-barra").dataset.estado = estado;
+  $(".js-topo-txt").textContent = TOPO[estado]; $(".js-topo-relogio").textContent = relogio;
+  $(".js-barra-rotulo").textContent = BARRA[estado]; $(".js-barra-relogio").textContent = relogio;
+  ultimo = estado;
+}
+atualizaHora(); setInterval(atualizaHora, 1000);
 
 // Depoimentos em vídeo: a capa carrega na hora e o player do vturb só quando a pessoa toca
-const conta = C.VTURB_CONTA;
-$(".js-videos").innerHTML = (C.VIDEOS || []).map((v, i) => `<div class="video sobe" style="--d:${i * 60}ms"><img src="midia/depoimentos/${v.capa}" alt="" width="360" height="600" loading="lazy"><button type="button" data-player="${v.player}" aria-label="Assistir depoimento ${i + 1}"><span class="play"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="currentColor"/></svg></span></button></div>`).join("");
+const videos = C.VIDEOS || [];
+$(".js-videos").innerHTML = videos.map((v, i) => `<figure class="video sobe" style="--d:${(i % 4) * 70}ms"><figure><img src="midia/depoimentos/${v.capa}" alt="" width="360" height="640" loading="lazy"><button type="button" data-i="${i}" aria-label="Assistir: ${v.titulo}"><span class="play"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="currentColor"/></svg></span></button></figure><figcaption><small>${v.marca}</small><b>${v.titulo}</b></figcaption></figure>`).join("");
 $(".js-videos").addEventListener("click", e => {
-  const b = e.target.closest("button[data-player]"); if (!b) return;
-  const id = b.dataset.player, caixa = b.parentElement;
-  const p = document.createElement("vturb-smartplayer"); p.id = "vid-" + id;
+  const b = e.target.closest("button[data-i]"); if (!b) return;
+  const v = videos[b.dataset.i], caixa = b.parentElement;
+  const p = document.createElement("vturb-smartplayer"); p.id = "vid-" + v.player;
+  caixa.style.aspectRatio = v.proporcao || "9 / 16";
   caixa.innerHTML = ""; caixa.appendChild(p);
-  const s = document.createElement("script"); s.src = `https://scripts.converteai.net/${conta}/players/${id}/v4/player.js`; s.async = true; document.head.appendChild(s);
+  const s = document.createElement("script"); s.src = `https://scripts.converteai.net/${C.VTURB_CONTA}/players/${v.player}/v4/player.js`; s.async = true; document.head.appendChild(s);
 });
-
-// Setas dos carrosséis
-$$(".seta").forEach(b => b.addEventListener("click", () => { const c = document.getElementById(b.dataset.alvo); c.scrollBy({ left: b.dataset.dir * c.firstElementChild.offsetWidth * 1.05, behavior: "smooth" }); }));
-
-// Contagem regressiva: só com prazo real no config
-if (C.PRAZO) {
-  const fim = new Date(C.PRAZO).getTime(), z = n => String(n).padStart(2, "0");
-  const tick = () => {
-    const r = Math.max(0, fim - Date.now()) / 1000;
-    $(".js-d").textContent = z(Math.floor(r / 86400)); $(".js-h").textContent = z(Math.floor(r % 86400 / 3600));
-    $(".js-m").textContent = z(Math.floor(r % 3600 / 60)); $(".js-s").textContent = z(Math.floor(r % 60));
-  };
-  if (fim > Date.now()) { $(".js-contagem").classList.add("ativa"); tick(); setInterval(tick, 1000); }
-}
 
 // Barra fixa no celular: aparece depois do topo e some quando a caixa de preço está na tela
 const barra = $(".js-barra"); let passouTopo = false, caixaNaTela = false;
-const atualiza = () => barra.classList.toggle("ativa", passouTopo && !caixaNaTela);
-new IntersectionObserver(([e]) => { passouTopo = !e.isIntersecting; atualiza(); }).observe($(".hero .btn"));
-new IntersectionObserver(([e]) => { caixaNaTela = e.isIntersecting; atualiza(); }).observe($(".caixa"));
+const mostraBarra = () => barra.classList.toggle("ativa", passouTopo && !caixaNaTela);
+new IntersectionObserver(([e]) => { passouTopo = !e.isIntersecting && e.boundingClientRect.top < 0; mostraBarra(); }).observe($(".hero .estado"));
+new IntersectionObserver(([e]) => { caixaNaTela = e.isIntersecting; mostraBarra(); }).observe($(".caixa"));
 
 // Entradas ao rolar
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visto"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -6% 0px" });
