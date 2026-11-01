@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="config.js?v=3"></script>
+<script src="config.js?v=4"></script>
 <style>
 :root {
   --bg: #050506;
@@ -117,15 +117,16 @@ section { position: relative; }
 .emb-rota b { display: block; font-size: 30px; letter-spacing: -.02em; line-height: 1; }
 .emb-rota small { display: block; color: var(--muted); font-size: 12px; margin-top: 4px; line-height: 1.3; }
 .emb-rota div:last-child { text-align: right; }
-.emb-rota svg { width: 34px; height: 34px; color: var(--gold); }
+.voo { position: relative; height: 2px; min-width: 70px; background: repeating-linear-gradient(90deg, rgba(255, 200, 61, .7) 0 6px, transparent 6px 11px); }
+.voo svg { position: absolute; left: 50%; top: 50%; width: 30px; height: 30px; color: var(--gold); transform: translate(-50%, -50%) rotate(90deg); filter: drop-shadow(0 0 8px rgba(255, 196, 46, .6)); }
 .emb-campos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 14px 0; border-block: 1px solid var(--linha); }
 .emb-campos small, .emb-tarifa small { display: block; font-size: 10.5px; letter-spacing: .12em; color: var(--muted); font-weight: 700; }
 .emb-campos b { font-size: 17px; }
-.emb-tarifa { display: flex; justify-content: space-between; align-items: end; gap: 12px; margin-top: 14px; }
+.emb-tarifa { display: flex; justify-content: space-between; align-items: end; gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--linha); }
 .emb-tarifa .de { font-size: 15px; font-weight: 700; }
 .emb-tarifa .por { font-size: 44px; font-weight: 800; letter-spacing: -.04em; line-height: 1; color: var(--gold); }
 .emb-tarifa .por sup { font-size: 18px; vertical-align: 18px; margin-right: 2px; }
-.emb-canhoto { display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 22px 10px; }
+.emb-canhoto { display: flex; align-items: center; justify-content: center; padding: 22px 10px; }
 .emb-canhoto span { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 11px; letter-spacing: .2em; font-weight: 800; color: var(--gold); }
 .codigo { width: 46px; height: 120px; background: repeating-linear-gradient(0deg, var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 7px, transparent 7px 9px, var(--ink) 9px 10px, transparent 10px 13px); opacity: .85; border-radius: 2px; }
 
@@ -292,11 +293,12 @@ footer p + p { margin-top: 8px; }
   .emb-rota { margin: 12px 0 10px; gap: 8px; }
   .emb-rota b { font-size: 22px; }
   .emb-rota small { font-size: 10.5px; }
-  .emb-rota svg { width: 24px; height: 24px; }
+  .voo { min-width: 50px; }
+  .voo svg { width: 24px; height: 24px; }
   .emb-campos { padding: 10px 0; gap: 6px; }
   .emb-campos small, .emb-tarifa small { font-size: 10px; letter-spacing: .08em; }
   .emb-campos b { font-size: 14px; }
-  .emb-tarifa { margin-top: 10px; }
+  .emb-tarifa { margin-top: 12px; padding-top: 12px; }
   .emb-tarifa .de { font-size: 13px; }
   .emb-tarifa .por { font-size: 34px; }
   .emb-tarifa .por sup { font-size: 14px; vertical-align: 14px; }
@@ -452,23 +454,18 @@ footer p + p { margin-top: 8px; }
       <!-- A oferta impressa como um cartão de embarque -->
       <div class="embarque sobe" style="--d:160ms" aria-label="Resumo da oferta: você e mais uma pessoa, 2 anos de Comunidade VIP, por R$ 397">
         <div class="emb-corpo">
-          <div class="emb-topo"><span>CARTÃO DE EMBARQUE · SUPER BLACK FRIDAY</span><img src="midia/logo-globo.png" alt="" width="26" height="26"></div>
+          <div class="emb-topo"><span>CARTÃO DE EMBARQUE BLACK</span><img src="midia/logo-globo.png" alt="" width="26" height="26"></div>
           <div class="emb-rota">
-            <div><b>BRA</b><small>Qualquer aeroporto do Brasil</small></div>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 13.5l7-1.5 4.5-7.5h2.5l-2 7 5 .5c1 .1 1 1.9 0 2l-5 .5 2 7h-2.5L9.5 14l-7-1.5z" fill="currentColor"/></svg>
-            <div><b>MUNDO</b><small>Pra onde você quiser</small></div>
-          </div>
-          <div class="emb-campos">
-            <div><small>PASSAGEIROS</small><b>Você + 1</b></div>
-            <div><small>VALIDADE</small><b>2 anos</b></div>
-            <div><small>CLASSE</small><b>VIP</b></div>
+            <div><b>BRA</b><small>Todo o Brasil</small></div>
+            <div class="voo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" fill="currentColor"/></svg></div>
+            <div><b>MUNDO</b><small>Pra onde quiser</small></div>
           </div>
           <div class="emb-tarifa">
             <div><small>TARIFA NORMAL</small><span class="de riscado js-ancora">R$ 8.716</span></div>
             <div><small>TARIFA BLACK</small><span class="por"><sup>R$</sup><span class="js-preco-num">397</span></span></div>
           </div>
         </div>
-        <div class="emb-canhoto" aria-hidden="true"><span>VOCÊ + 1 · 2 ANOS</span><div class="codigo"></div></div>
+        <div class="emb-canhoto" aria-hidden="true"><div class="codigo"></div></div>
       </div>
     </div>
   </div>
@@ -676,10 +673,10 @@ function situacao() {
   const falta = ((abre - s) % dia + dia) % dia;
   return { estado: s >= fecha && s < enc ? "encerrado" : "antes", falta };
 }
-const TITULO = { antes: `As vagas abrem hoje às ${horaAbre}`, aberto: "As vagas estão abertas!", encerrado: "As vagas de hoje foram encerradas" };
-const ROTULO = { antes: "Faltam", aberto: "Fecham em", encerrado: `As próximas abrem às ${horaAbre}. Faltam` };
-const TOPO = { antes: `As vagas abrem às ${horaAbre} · faltam`, aberto: "Vagas abertas · fecham em", encerrado: `Vagas encerradas · próximas às ${horaAbre}, em` };
-const BARRA = { antes: "Vagas abrem em", aberto: "Vagas fecham em", encerrado: "Vagas encerradas" };
+const TITULO = { antes: `As vagas abrem hoje às ${horaAbre}`, aberto: "As vagas estão abertas!", encerrado: "As vagas estão fechadas" };
+const ROTULO = { antes: "Faltam", aberto: "Fecham em", encerrado: `Nova abertura hoje às ${horaAbre}. Faltam` };
+const TOPO = { antes: `As vagas abrem às ${horaAbre} · faltam`, aberto: "Vagas abertas · fecham em", encerrado: `Vagas fechadas · nova abertura às ${horaAbre}, em` };
+const BARRA = { antes: "Vagas abrem em", aberto: "Vagas fecham em", encerrado: "Nova abertura em" };
 let ultimo = "";
 function atualizaHora() {
   const { estado, falta } = situacao();

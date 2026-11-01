@@ -10,12 +10,12 @@ window.CONFIG = {
 
   // Horário das vagas, todo dia, no horário de Brasília.
   // Antes de ABRE: contagem "as vagas abrem às 19h". Entre ABRE e FECHA: "vagas abertas, fecham em".
-  // De FECHA até ENCERRADO_ATE: "as vagas de hoje foram encerradas" (com a contagem para as 19h). Depois, volta a contagem.
+  // De FECHA até ENCERRADO_ATE: "as vagas estão fechadas, nova abertura às 19h" (com a contagem para as 19h). Depois, volta a contagem.
   VAGAS: { ABRE: "19:00", FECHA: "00:10", ENCERRADO_ATE: "12:00" },
   TEXTOS: {
     antes: "Às 19h o link para garantir a sua vaga chega no seu grupo do WhatsApp.",
     aberto: "Garanta a sua pelo link que chegou no seu grupo do WhatsApp.",
-    encerrado: "Novas vagas abrem hoje às 19h, pelo link no seu grupo do WhatsApp.",
+    encerrado: "O link chega no seu grupo do WhatsApp na hora da abertura.",
   },
   // A página não tem botão (pedido do Pedro, 31/10/2026). Se um dia precisar, true + CHECKOUT mostra o botão só com as vagas abertas.
   MOSTRAR_BOTAO_NO_ABERTO: false,
