@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="config.js?v=4"></script>
+<script src="config.js?v=5"></script>
 <style>
 :root {
   --bg: #050506;
@@ -83,8 +83,6 @@ section { position: relative; }
 .estado[data-estado="aberto"] { border-color: rgba(61, 220, 132, .75); box-shadow: 0 0 50px -16px var(--verde-glow); background: linear-gradient(180deg, #0b1a10, #111 70%); }
 .estado[data-estado="aberto"] .estado-titulo, .estado[data-estado="aberto"] .relogio i { color: var(--verde); }
 .estado[data-estado="aberto"] .relogio .u { border-color: rgba(61, 220, 132, .3); }
-.estado[data-estado="encerrado"] { border-color: #4a4a50; box-shadow: none; background: #111; }
-.estado[data-estado="encerrado"] .estado-titulo { color: #ff7a6b; }
 
 /* HERO */
 .hero { position: relative; overflow: hidden; padding: 36px 0 100px; isolation: isolate; }
@@ -390,7 +388,6 @@ footer p + p { margin-top: 8px; }
   .barra .hora small { display: block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--gold); }
   .barra .hora b { font-size: 20px; font-variant-numeric: tabular-nums; }
   .barra[data-estado="aberto"] .hora small { color: var(--verde); }
-  .barra[data-estado="encerrado"] .hora small { color: #ff7a6b; }
 }
 @media (max-width: 360px) {
   .hero h1 { font-size: 25px; }
@@ -412,13 +409,13 @@ footer p + p { margin-top: 8px; }
   <span>A oferta da Super Black Friday chegou</span><i>✦</i><span>2 anos pelo preço de 1</span><i>✦</i><span>Mais um acesso pra quem você quiser</span><i>✦</i><span>Vagas a partir das 19h</span><i>✦</i>
 </div></div>
 
-<div class="topo-hora js-topo-hora" aria-hidden="true"><span class="js-topo-txt">As vagas abrem às 19h</span><b class="js-topo-relogio"></b></div>
+<div class="topo-hora js-topo-hora" aria-hidden="true"><span class="js-topo-txt">Vagas fechadas · abrem às 19h</span><b class="js-topo-relogio"></b></div>
 
 <!-- Modelo do cartão das vagas. O script copia para o topo, a caixa de preço e o fim da página. -->
 <template id="modelo-estado">
   <div class="estado" data-estado="antes" role="timer" aria-live="off">
-    <p class="estado-titulo js-e-titulo">As vagas abrem hoje às 19h</p>
-    <p class="estado-rotulo js-e-rotulo">Faltam</p>
+    <p class="estado-titulo js-e-titulo">As vagas ainda estão fechadas</p>
+    <p class="estado-rotulo js-e-rotulo">Abrem hoje às 19h. Faltam</p>
     <div class="relogio">
       <div class="u"><b class="js-e-h">00</b><small>horas</small></div><i>:</i>
       <div class="u"><b class="js-e-m">00</b><small>min</small></div><i>:</i>
@@ -660,23 +657,23 @@ if (temBotao) { document.body.classList.add("com-botao"); $$(".js-comprar").forE
 // Horário de Brasília (UTC−3, sem horário de verão)
 const V = C.VAGAS || {}, T = C.TEXTOS || {};
 const min = s => { const [h, m] = s.split(":").map(Number); return h * 60 + m; };
-const ABRE = min(V.ABRE || "19:00"), FECHA = min(V.FECHA || "00:10"), ENC = min(V.ENCERRADO_ATE || "12:00");
+const ABRE = min(V.ABRE || "19:00"), FECHA = min(V.FECHA || "00:10");
 const horaAbre = (V.ABRE || "19:00").replace(/:00$/, "h").replace(":", "h");
 const z = n => String(n).padStart(2, "0");
 function situacao() {
   const agora = Date.now(), br = new Date(agora - 3 * 3600e3);
   const s = br.getUTCHours() * 3600 + br.getUTCMinutes() * 60 + br.getUTCSeconds();
-  const dia = 86400, abre = ABRE * 60, fecha = FECHA * 60, enc = ENC * 60;
-  // A janela aberta vai das 19h até 00:10 do dia seguinte
+  const dia = 86400, abre = ABRE * 60, fecha = FECHA * 60;
+  // A janela aberta vai das 19h até 00:10 do dia seguinte. Fora dela, a página sempre mostra a abertura das 19h
+  // como se fosse a primeira (pedido do Pedro, 1/11/2026): sem "encerradas" e sem "nova abertura".
   const aberto = fecha < abre ? (s >= abre || s < fecha) : (s >= abre && s < fecha);
   if (aberto) return { estado: "aberto", falta: ((fecha - s) % dia + dia) % dia };
-  const falta = ((abre - s) % dia + dia) % dia;
-  return { estado: s >= fecha && s < enc ? "encerrado" : "antes", falta };
+  return { estado: "antes", falta: ((abre - s) % dia + dia) % dia };
 }
-const TITULO = { antes: `As vagas abrem hoje às ${horaAbre}`, aberto: "As vagas estão abertas!", encerrado: "As vagas estão fechadas" };
-const ROTULO = { antes: "Faltam", aberto: "Fecham em", encerrado: `Nova abertura hoje às ${horaAbre}. Faltam` };
-const TOPO = { antes: `As vagas abrem às ${horaAbre} · faltam`, aberto: "Vagas abertas · fecham em", encerrado: `Vagas fechadas · nova abertura às ${horaAbre}, em` };
-const BARRA = { antes: "Vagas abrem em", aberto: "Vagas fecham em", encerrado: "Nova abertura em" };
+const TITULO = { antes: "As vagas ainda estão fechadas", aberto: "As vagas estão abertas!" };
+const ROTULO = { antes: `Abrem hoje às ${horaAbre}. Faltam`, aberto: "Fecham em" };
+const TOPO = { antes: `Vagas fechadas · abrem às ${horaAbre}, em`, aberto: "Vagas abertas · fecham em" };
+const BARRA = { antes: "Vagas abrem em", aberto: "Vagas fecham em" };
 let ultimo = "";
 function atualizaHora() {
   const { estado, falta } = situacao();

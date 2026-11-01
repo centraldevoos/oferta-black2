@@ -9,13 +9,12 @@ window.CONFIG = {
   PRECO_VIP_ANO: 297,
 
   // Horário das vagas, todo dia, no horário de Brasília.
-  // Antes de ABRE: contagem "as vagas abrem às 19h". Entre ABRE e FECHA: "vagas abertas, fecham em".
-  // De FECHA até ENCERRADO_ATE: "as vagas estão fechadas, nova abertura às 19h" (com a contagem para as 19h). Depois, volta a contagem.
-  VAGAS: { ABRE: "19:00", FECHA: "00:10", ENCERRADO_ATE: "12:00" },
+  // Antes de ABRE: "as vagas ainda estão fechadas, abrem hoje às 19h" com a contagem. Entre ABRE e FECHA: "vagas abertas, fecham em".
+  // Depois de FECHA, volta a contagem para as 19h, sempre como se fosse a primeira abertura (sem "encerradas" nem "nova abertura").
+  VAGAS: { ABRE: "19:00", FECHA: "00:10" },
   TEXTOS: {
-    antes: "Às 19h o link para garantir a sua vaga chega no seu grupo do WhatsApp.",
+    antes: "O link pra garantir a sua vaga chega no seu grupo do WhatsApp às 19h.",
     aberto: "Garanta a sua pelo link que chegou no seu grupo do WhatsApp.",
-    encerrado: "O link chega no seu grupo do WhatsApp na hora da abertura.",
   },
   // A página não tem botão (pedido do Pedro, 31/10/2026). Se um dia precisar, true + CHECKOUT mostra o botão só com as vagas abertas.
   MOSTRAR_BOTAO_NO_ABERTO: false,
